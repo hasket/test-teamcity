@@ -1,11 +1,15 @@
-package _Self.buildTypes
-
 import jetbrains.buildServer.configs.kotlin.*
 import jetbrains.buildServer.configs.kotlin.branchRemoteRun
 import jetbrains.buildServer.configs.kotlin.buildSteps.python
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 
-object Ansible : BuildType({
+version = "2022.04"
+
+project {
+    buildType(AnsibleVersion2)
+}
+
+object AnsibleVersion2 : BuildType({
     name = "ansiblev2"
 
     vcs {
