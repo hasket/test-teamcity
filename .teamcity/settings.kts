@@ -1,17 +1,24 @@
-import jetbrains.buildServer.configs.kotlin.*
-import jetbrains.buildServer.configs.kotlin.buildSteps.script
+package TestSubProject.buildTypes
 
-version = "2022.04"
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.python
 
-project {
-    buildType(HelloWorld)
-}
+object TestSubProject_BuildAnsible : BuildType({
+    name = "build_ansible_v2"
 
-object HelloWorld: BuildType({
-    name = "Hello world"
+    vcs {
+        root(Ansible_1)
+    }
+
     steps {
-        script {
-            scriptContent = "echo 'Hello world!'"
+        python {
+            workingDir = "ansible"
+            environment = venv {
+                pipArgs = "install"
+            }
+            command = file {
+                filename = "setup.py"
+            }
         }
     }
 })
