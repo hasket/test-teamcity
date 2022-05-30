@@ -7,7 +7,7 @@ object TestSubProject_BuildAnsible : BuildType({
     name = "build_ansible_v2"
 
     vcs {
-        root(Ansible_1)
+        root(ansible)
     }
 
     steps {
