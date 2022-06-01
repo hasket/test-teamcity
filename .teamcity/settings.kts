@@ -1,44 +1,35 @@
-import jetbrains.buildServer.configs.kotlin.v10.buildSteps.XcodeStep
-import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.*
-
+import jetbrains.buildServer.configs.kotlin.v2019_2.*
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
+import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.python
+import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
 
 version = "2022.04"
 
 project {
     buildType(HelloWorld)
     buildType(Ansible)
+    vcsRoot(AnsibleRoot)
 }
 
 object HelloWorld: BuildType({
     name = "Hello world"
     steps {
         script {
-            command = "echo 'Hello world!'"
-        }
-        script {
-
+            scriptContent = "echo 'Hello world!'"
         }
     }
 })
 
 object Ansible: BuildType({
-    name = "ansible"
+    name = "Ansible"
 
-    vcs = 
+    vcs {
+        root(AnsibleRoot)
+    }
 
-    steps {
-        script {
-            scriptContent = "source ./hacking/env-setup"
-        }
-        python {
-            environment = venv {
-            }
-            command = flake8 {
-                scriptArguments = "--config=setup.cfg"
-            }
-        }
-        python {
-            environment = venv {
+    steps{
+        python{
+           environment = venv{
             }
             command = file {
                 filename = "setup.py"
@@ -46,4 +37,10 @@ object Ansible: BuildType({
             }
         }
     }
+})
+
+object AnsibleRoot: GitVcsRoot({
+    name = "ansible_root_v2"
+    url = "https://github.com/ansible/ansible.git"
+    branch = "devel"
 })
