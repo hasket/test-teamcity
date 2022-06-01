@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.teamcity/teamcity-pipelines-dsl.iml" filepath="$PROJECT_DIR$/.teamcity/teamcity-pipelines-dsl.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/test-teamcity.iml" filepath="$PROJECT_DIR$/.idea/test-teamcity.iml" />
     </modules>
   </component>
