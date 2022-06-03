@@ -1,7 +1,9 @@
 import jetbrains.buildServer.configs.kotlin.v2019_2.*
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.v2019_2.buildSteps.python
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.VcsTrigger
 import jetbrains.buildServer.configs.kotlin.v2019_2.vcs.GitVcsRoot
+import jetbrains.buildServer.configs.kotlin.v2019_2.triggers.vcs
 
 version = "2022.04"
 
@@ -36,7 +38,19 @@ object Ansible: BuildType({
                 scriptArguments = "install --user --install-scripts=."
             }
         }
+        python {
+            environment = venv{
+
+            }
+            command = flake8 {
+                scriptArguments = "--config=setup.cfg"
+            }
+
+        }
     }
+})
+
+object AnsibleTrigger: VcsTrigger({
 })
 
 object AnsibleRoot: GitVcsRoot({
