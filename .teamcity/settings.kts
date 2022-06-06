@@ -31,7 +31,8 @@ object Ansible: BuildType({
 
     triggers {
         vcs {
-
+            type = "VCSTrigger"
+            enabled = true
         }
 
     }
