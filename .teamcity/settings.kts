@@ -29,6 +29,13 @@ object Ansible: BuildType({
         root(AnsibleRoot)
     }
 
+    triggers {
+        vcs {
+
+        }
+
+    }
+
     steps{
         python{
            environment = venv{
@@ -48,9 +55,6 @@ object Ansible: BuildType({
 
         }
     }
-})
-
-object AnsibleTrigger: VcsTrigger({
 })
 
 object AnsibleRoot: GitVcsRoot({
